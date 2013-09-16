@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Módulo que contiene la implementacion del tipo "cadena" y las funciones para su uso.
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -8,7 +15,6 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-//Módulo que contiene la implementacion del tipo "cadena" y las funciones para su uso.
 
 typedef struct cadena_ cadena;
 

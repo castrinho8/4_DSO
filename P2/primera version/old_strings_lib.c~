@@ -1,10 +1,3 @@
-/*
-# Pablo Castro Valiño (pablo.castro1@udc.es)
-# Deseño de Sistemas Operativos
-
-Modulo que contiene la implementación clásica de algunas funciones de "strings_lib"
-
-*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -15,7 +8,7 @@ Modulo que contiene la implementación clásica de algunas funciones de "strings
 #include <malloc.h>
 #include <stdlib.h>
 
-
+//Modulo que contiene la implementación clásica de algunas funciones de "strings_lib"
 
 
 char * insertado(int tam_dest,int tam_src,int pos_in, char * destino, char * origen){

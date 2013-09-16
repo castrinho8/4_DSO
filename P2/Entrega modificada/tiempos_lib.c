@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Módulo que contiene las funciones para realizar la medición de tiempos.
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -9,7 +16,6 @@
 #include <stdlib.h>
 
 
-//Módulo que contiene las funciones para realizar la medición de tiempos.
 int timedef = 0;
 
 /*

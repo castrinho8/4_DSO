@@ -1,4 +1,7 @@
-CAMBIOS:
+
+Listado de cambios realizados posteriormente a la entrega de la práctica y por lo tanto que 
+no se encuentran en los ficheros enviados inicialmente:
+
 
 
 -Borrado fichero old_strings que solo se usaba para la comprobacion de tiempos de
@@ -10,7 +13,8 @@ De esta forma evitamos que con un numero grande de iteraciones haya problemas co
 
 -Modificada entera str_cmp_v.
 
--Modificado el test de tiempos de str_cmp_v para que se compruebe el peor caso, que los arrays sean iguales.
+-Modificado el test de tiempos de str_cmp_v para que se compruebe el peor caso, que los arrays sean iguales en lugar
+de probar con strings aleatorios.
 
 -Borrada una linea redundante en:
 	last_overwrite = (pos_in+tam_string_origen)>(pos_in+tam_string_destino)? tam_string_destino:

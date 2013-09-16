@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Módulo que contiene la implementación de las funciones de tratamiento de strings.
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -10,7 +17,6 @@
 
 #include "cadena_lib.c"
 
-//Módulo que contiene la implementación de las funciones de tratamiento de strings.
 
 //Cabeceras de las funciones implementadas.
 cadena * str_insert_v(int pos_in,cadena * cad_destino,cadena * cad_origen);
@@ -87,8 +93,8 @@ int seek_pos(int pos, cadena * cad_palabra, int *pos_array, int *pos_rel){
 		pos_array_loc++;
 	}
 
-	*pos_array = pos_array_loc - 1; //HAYA LA POSICION EN EL ARRAY DE ESTRUCTURAS
-	*pos_rel = pos - (count - array[*pos_array].iov_len); //HAYA POSICION RELATIVA (Dentro del array)
+	*pos_array = pos_array_loc - 1; //ENCUENTRA LA POSICION EN EL ARRAY DE ESTRUCTURAS
+	*pos_rel = pos - (count - array[*pos_array].iov_len); //ENCUENTRA POSICION RELATIVA (Dentro del array)
 	return 0;
 }
 

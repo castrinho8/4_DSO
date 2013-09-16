@@ -2,7 +2,7 @@
 # Pablo Castro Valiño (pablo.castro1@udc.es)
 # Deseño de Sistemas Operativos
 
-Programa que realiza los test de funcionamiento sobre la librería implementada
+Módulo que contiene la implementación de las funciones de tratamiento de strings.
 
 */
 #include <stdio.h> 

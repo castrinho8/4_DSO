@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Programa que realiza los test de duración sobre la librería implementada
+
+*/
 #include <math.h>
 #include <stdio.h> 
 #include <unistd.h>

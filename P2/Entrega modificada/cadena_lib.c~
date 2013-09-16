@@ -17,6 +17,7 @@ Módulo que contiene la implementacion del tipo "cadena" y las funciones para su
 #include <stdlib.h>
 
 
+
 typedef struct cadena_ cadena;
 
 struct cadena_{
