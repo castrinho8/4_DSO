@@ -1,9 +1,14 @@
-#include <stdio.h>
-
 /*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
 Programa que llama recursivamente a una funcion, muestra el stack en cada uno de los frames
 y realiza un salto temporal entre frames.
+
 */
+
+#include <stdio.h>
+
 
 int test = 0;
 

@@ -1,12 +1,22 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Programa que modifica el fichero "stack.txt"
+
+Nota:
+Los datos que aparecen acerda de posicioes de memoria y direcciones
+del stack pueden variar en función del ordenador en donde sea ejecutado
+el programa.
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <string.h>
-/*
-Programa que modifica el fichero "stack.txt"
-*/
+
 int main(){
 	int file;
 	int dir_salto; //Direccion a saltar en hexadecimal 08048554

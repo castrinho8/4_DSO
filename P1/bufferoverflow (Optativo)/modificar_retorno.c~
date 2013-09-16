@@ -1,15 +1,21 @@
-#include <stdio.h> 
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Notas:
+Hay que ejecutar con setarch `arch` -R para que siempre
+ se asigne las mismas posiciones al stack
+
+*/#include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <string.h>
-/*
-Programa que modifica el fichero "stack.txt"
-*/
+
 int main(){
 	int file;
-	int dir_salto; //Direccion a saltar en hexadecimal 08048584
+	int dir_salto; //Direccion a saltar en hexadecimal 08048554
 	int pos_ret; //Posición de la dirección de retorno en el stack 48
 	int pos_arg; //Posicion donde se encuentra el argumento de "anotherfunction" 0xbffff334
 
@@ -18,7 +24,7 @@ int main(){
 	printf("Que posicion modificar: SALTO:48\n");
 	scanf("%i",&pos_ret);
 
-	printf("Introduzca el valor de esa posicion: SALTO:08048584\n");
+	printf("Introduzca el valor de esa posicion: SALTO:08048554\n");
 	scanf("%x",&dir_salto);
 
 	if((file = open("stack.bin", O_WRONLY, 0777)) == -1){ 

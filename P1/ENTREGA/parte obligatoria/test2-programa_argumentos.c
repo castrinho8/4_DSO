@@ -1,9 +1,13 @@
-#include <stdio.h>
-
 /*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
 Programa para testear la posición y la evolucion de los argumentos de una función y que 
 llama recursivamente a dicha funcion mostrando el stack en cada uno de los frames.
+
 */
+#include <stdio.h>
+
 
 int funcion1(int n,int arg1,int arg2){
 	int i = 0;

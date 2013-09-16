@@ -1,17 +1,24 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Notas:
+Hay que ejecutar con setarch `arch` -R para que siempre
+ se asigne las mismas posiciones al stack
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <string.h>
-//	setarch `arch` -R
-//ret 48
 
 int anotherfunction(char * argument){
 	printf("ARGUMENTO: %p\n",&argument);
 	printf("ARGUMENTO: %s\n",argument);
 	system(argument);
-	exit(0);
+	//exit(0);
 }
 
 

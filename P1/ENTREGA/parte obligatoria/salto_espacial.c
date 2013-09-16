@@ -1,11 +1,15 @@
-#include <stdio.h>
-
-#define DIST_SALTO 5
-
 /*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
 Programa que llama recursivamente a una funcion, muestra el stack en cada uno de los frames
 y finalmente se salta una instruccion al modificar el valor de retorno de una función.
+
 */
+
+#include <stdio.h>
+#define DIST_SALTO 5
+
 
 int funcion1(int n){
 	int i = 0;

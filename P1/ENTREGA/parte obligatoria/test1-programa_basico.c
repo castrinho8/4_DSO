@@ -1,9 +1,14 @@
-#include <stdio.h>
-
 /*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
 Programa básico para testear la colocación y la evolución de las variables locales que 
 llama recursivamente a una funcion y muestra el stack en cada uno de los frames.
+
 */
+
+#include <stdio.h>
+
 
 int funcion1(int n){
 	int i = 0;

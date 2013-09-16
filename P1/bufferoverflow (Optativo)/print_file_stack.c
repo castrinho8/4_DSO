@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Programa que imprime el fichero "stack.txt"
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -5,9 +12,6 @@
 #include <sys/types.h>
 #include <string.h>
 
-/*
-Programa que imprime el fichero "stack.txt"
-*/
 int main(){
 	int i = 0, file;
 	char a[100];
