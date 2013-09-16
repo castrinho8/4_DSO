@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Programa que crea 3 hilos y realiza el factorial de un número introducido.
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -5,7 +12,6 @@
 #include <sys/types.h>
 #include <string.h>
 #include <aio.h>
-//Programa que crea 3 hilos y realiza el factorial de un número introducido.
 
 //Array de control para las primeras llamadas a los threads
 int start[3];
@@ -14,9 +20,10 @@ int start[3];
 int fin[3];
 
 //Variables para guardar los números para los diferentes threads
-int numero_t0 = 100;
-int numero_t1 = 100;
-int numero_t2 = 100;
+int numero_t0 = 5;
+int numero_t1 = 6;
+int numero_t2 = 7;
+//8192
 
 //Variables para guardar los factoriales para los diferentes threads
 int fact_t0 = 1;
@@ -32,12 +39,12 @@ char mensaje[1024];
 
 //Función que cambia entre threads
 void yield(){
-	int a[20];
+	int a[10];
 	int i = 0;
 	//Guarda las direcciones
 	t_frame[ct] = a[13];//frame
 	t_return[ct] = a[14];//return
-	
+
 	//1º ACCESO A T0
 	if(start[0]){
 		start[0]= 0;
@@ -87,9 +94,11 @@ int t0(int numero_t0){
 	if (numero_t0){
 
 		temp = t0(numero_t0-1);
+		
+		//printf("Thread-0\n");
 
-		sprintf(mensaje,"Thread:%i\n",ct);
-		write(1,mensaje,strlen(mensaje));
+		//sprintf(mensaje,"Thread-0\n");
+		//write(1,mensaje,strlen(mensaje));
 
 		adjust_frame();
 		return numero_t0 * temp;
@@ -107,9 +116,9 @@ int t1(int numero_t1){
 	if (numero_t1){
 
 		temp = t1(numero_t1-1);
-
-		sprintf(mensaje,"Thread:%i\n",ct);
-		write(1,mensaje,strlen(mensaje));
+		//printf("Thread-1\n");
+		//sprintf(mensaje,"Thread-1\n");
+		//write(1,mensaje,strlen(mensaje));
 
 		adjust_frame();
 		return numero_t1 * temp;
@@ -126,9 +135,9 @@ int t2(int numero_t2){
 	if (numero_t2){
 
 		temp = t2(numero_t2-1);
-
-		sprintf(mensaje,"Thread:%i\n",ct);
-		write(1,mensaje,strlen(mensaje));
+		//printf("Thread-2\n");
+		//sprintf(mensaje,"Thread-2\n");
+		//write(1,mensaje,strlen(mensaje));
 
 		adjust_frame();
 		return numero_t2 * temp;
@@ -155,7 +164,7 @@ int main(int argc, char *argv[]){
 	int salidat1 = fact_t1;
 	int salidat2 = fact_t2;
 
-	printf("\nThread 0 - Resultado:%i\nThread 1 - Resultado:%i\nThread 2 - Resultado:%i\n",salidat0,salidat1,salidat2);
+	printf("Thread 0 - Resultado:%i\nThread 1 - Resultado:%i\nThread 2 - Resultado:%i\n",salidat0,salidat1,salidat2);
 }
 
 

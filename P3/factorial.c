@@ -1,3 +1,10 @@
+/*
+# Pablo Castro Valiño (pablo.castro1@udc.es)
+# Deseño de Sistemas Operativos
+
+Programa que crea 3 hilos y realiza el factorial de un número introducido.
+
+*/
 #include <stdio.h> 
 #include <unistd.h>
 #include <fcntl.h>
@@ -5,7 +12,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <aio.h>
-//Programa que crea 3 hilos y realiza el factorial de un número introducido.
+
 
 //Array de control para las primeras llamadas a los threads
 int start[3];

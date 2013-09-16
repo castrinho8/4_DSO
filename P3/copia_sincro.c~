@@ -2,7 +2,7 @@
 # Pablo Castro Valiño (pablo.castro1@udc.es)
 # Deseño de Sistemas Operativos
 
-Módulo que crea 2 threads que realizan doble buffering
+Módulo que crea 2 threads y 
 
 */
 #include <stdio.h> 
