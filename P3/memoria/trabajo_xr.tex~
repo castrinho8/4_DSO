@@ -1,0 +1,194 @@
+\documentclass[12pt,a4paper,helvetica,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{color,graphicx}
+\usepackage[colorlinks=true,urlcolor=black]{hyperref}
+\usepackage[hyphenbreaks,preserveurlmacro]{breakurl}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{helvetica}
+ \lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+    	 frame=b,         
+         keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\emph\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+}
+
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+
+
+\renewcommand{\tablename}{Tabla}
+
+\title{\Huge{Práctica 3: Threads en espacio de usuario.} \\ \normalsize{Diseño de Sistemas Operativos}}
+
+\author{Pablo Castro Valiño~(pablo.castro1@udc.es)}
+
+
+\date{Curso 2012-2013}
+	
+	
+\begin{document}
+	
+	
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+La utilización de threads a día de hoy es una práctica tremendamente común y fundamental
+para el desarrollo de la informática actual. La necesidad de aumentar la paralelización
+en los procesos ha llevado a la industria a hacer especial hincapié en el desarrollo de
+este campo de la computación.
+
+Nuestra práctica en concreto consiste en una implementación rudimentaria de threads en
+espacio de usuario, los cuales utilizaremos en la parte básica para realizar el cálculo
+simultáneo del factorial de tres números diferentes y en la parte optativa, para la
+realización de un programa que realice doble buffering, en una primera parte de manera
+síncrona y en una segunda de manera asíncrona.
+
+\section{Procedimiento para la realización de la práctica.}
+
+\subsection{Realización de un factorial en 3 threads.}
+Para la realización de esta parte de práctica se ha creado el fichero
+\textbf{factorial.c} (\ref{pre3}) con el total contenido de la misma.
+En él encontramos diferenciadas las funciones que implementan los diferentes threads
+(\emph{t0, t1, t2}), la función \emph{yield} que realiza el intercambio entre ellos y la
+función \emph{adjust\_frame} que funciona como función auxiliar para recolocar el
+\emph{stack pointer} cuando se realiza un salto.
+
+A continuación vamos a comentar el funcionamiento de las diferentes funciones:
+
+\begin{description}
+
+    \item \textbf{t0, t1, t2} 
+    El comportamiento de estas funciones es tremendamente simple, se limitan a realizar
+el cálculo del factorial del número que reciben, de forma recursiva y haciendo continuas
+llamadas a \emph{adjust\_frame} para cambiar entre los hilos.
+
+    \item \textbf{adjust\_frame}
+    Es la función que únicamente llama a \emph{Yield} y realiza un return.
+    
+    Se utiliza únicamente para conseguir que cuando se realice un salto y se modifique el
+puntero base de la pila, la cima de la pila quede en el lugar donde queremos.
+
+En circunstancias normales, el puntero de la cima de la pila va a quedarse muy arriba, de
+forma que si introducimos esta función antes de volver a nuestro código, al realizar
+\emph{return} de ella, se colocará el puntero cima de pila en donde está el base actual y
+el base se colocará en la dirección adecuada del frame anterior, y de esta forma se
+continuará ejecutando correctamente el código de la función.
+
+    \item \textbf{Yield}
+    Es la función que realiza la inicialización de los threads y que cambia entre ellos.
+    
+    Lo primero que hace es guardar el frame anterior y la dirección de retorno y
+comprobar si es la primera ejecución de cada uno de los threads, para en ese caso,
+lanzarlos.
+
+También se selecciona mediante un bucle el thread hacia el que vamos a cambiar y se
+comprueba que dicho thread elegido no ha terminado, en caso contrario se selecciona el
+siguiente.
+
+En el caso de que todos hayan terminado, se coloca la variable \textbf{ct} a 3 para
+indicar que se debe de terminar y volver al frame de la función \emph{adjust\_frame} que
+se lanzó desde el \emph{Main}, y por lo tanto terminar la ejecución del programa.
+
+\end{description}
+
+\subsection{Doble buffering}
+Para la realización de esta parte de práctica se ha creado el fichero
+\textbf{copia\_sincro.c} (\ref{pre4}) con el total contenido de la misma.\\
+
+En él encontramos diferenciadas las funciones que implementan los diferentes threads
+(\emph{t0, t1}), la función \emph{yield} que realiza el intercambio entre ellos y la
+función \emph{slow} que funciona como función auxiliar realizando cálculos inservibles
+para realentizar la ejecución.\\
+
+El funcionamiento del programa es muy simple, se abre el fichero de tres modos distintos,
+el primero para crear el archivo en el que se realizará la lectura y escritura en caso de
+que no exista, la segunda en modo lectura y la tercera en modo escritura.\\
+
+El thread \emph{t0} realiza la lectura del fichero en un buffer común mientras que
+\emph{t1} se encarga de la escritura de dicho buffer en el fichero, de forma que cuando
+terminemos se habrá leido del fichero el valor introducido, 5 veces y se habrá vuelto a
+escribir en el fichero.
+De esta forma el fichero \textbf{entrada.txt} contrendrá 'VALOR' 6 veces, el que hemos
+introducido desde el \emph{Main} para inicializar el fichero y los 5 siguientes que hemos
+leido y reescrito.
+
+\newpage
+
+\section{Índice de archivos adjuntos.}
+
+\begin{enumerate}
+
+    \item \textbf{Makefile} \label{pre0}
+Se ha introducido un fichero \emph{Makefile} para agilizar la compilación. 
+
+      \begin{itemize}
+
+	  \item \textbf{make all}
+	  Compila todos los ficheros.
+
+          \item \textbf{make fact}
+          Compila los ficheros que realizan el factorial.
+
+          \item \textbf{make sinc}
+	  Compila el fichero que realiza el doble buffering.
+
+          \item \textbf{make clean}
+	  Elimina todos los ficheros ejecutables.
+
+      \end{itemize}
+
+  \item \textbf{tests/programa1.c} \label{pre1}
+  \\
+Programa básico realizado en clase para testear el limite del stack.
+
+  \item \textbf{tests/programa2.c} \label{pre2}
+  \\
+Programa básico realizado en clase para la realización de los threads, que únicamente 
+escribe la letra 'a' o 'b' en función del thread en el que se encuentre, y lo hace de 
+manera alternativa.
+
+  \item \textbf{factorial.c} \label{pre3} 
+  \\
+Programa que realiza el factorial de forma recursiva en tres threads distintos. 
+Para ello se sube por el stack haciendo llamadas recursivas en cada thread, de forma que 
+el ultimo frame de cada uno, el valor del número del que se quiere hacer el factorial va a 
+ser 0 y luego vuelve a bajar intercalando unos threads con otros para realizar el cálculo.
+
+    \item \textbf{copia\_sincro.c} \label{pre4} 
+	\\
+Programa que crea dos threads, uno que escribe en un fichero y el otro que lee.
+
+  \end{enumerate}
+
+\end{document}

@@ -1,0 +1,79 @@
+#include <stdio.h> 
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <string.h>
+#include <sys/uio.h>
+#include <malloc.h>
+#include <stdlib.h>
+
+#include "strings_lib.c"
+#include "opt_strings_lib.c"
+#include "tiempos_lib.c"
+
+int main(){
+
+	char *str0 = "ali es ";
+	char *str1 = "guapita\n";
+	char *str2 = "bye\n";
+
+	int tam_iov = 2, tam_lec = 1; 
+	struct iovec iov[tam_iov];
+	struct iovec lec[tam_lec];
+	struct iovec * salida;
+	ssize_t nwritten,nread;
+	int file;
+
+	iov[0].iov_base = str0;
+	iov[0].iov_len = strlen(str0);
+	iov[1].iov_base = str1;
+	iov[1].iov_len = strlen(str1);
+
+	lec[0].iov_base = str2;
+	lec[0].iov_len = strlen(str2);
+
+
+	if((file = open ("file.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777)) == -1){ 
+		perror("No se pudo abrir el fichero.\n"); 
+		return;
+	}
+
+	nwritten = writev(file, iov, tam_iov);
+/*
+	int test;
+	printf("COMPARACION: \n");
+	if((test = str_cmp_v(iov,tam_iov,lec,tam_lec)) == -1)
+		exit(0);
+
+	str_printf_v(iov,tam_iov);
+	printf("%i ---\n",test);
+	str_printf_v(lec,tam_lec);
+
+	printf("INSERCIÓN: \n");
+	if((salida = str_insert_v(lec,tam_lec,iov,tam_iov,16)) == NULL)
+		exit(0);
+
+	str_printf_v(iov,tam_iov);
+	printf("-----\n");
+	str_printf_v(salida,4);
+
+	printf("BORRADO: \n");
+	if((salida = str_delete_v(iov,tam_iov,1,0)) == NULL)
+		exit(0);
+
+	str_printf_v(salida,3);
+*/
+
+	duracion_insertado(10000,iov,tam_iov,lec,tam_lec,0);
+
+	close(file);
+}
+
+
+
+
+
+
+
+

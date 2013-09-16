@@ -1,0 +1,28 @@
+// NOTAS practica 4 - Device drivers
+// Estudiarse el codigo (en generico). Despues tendremos que estudiar uno concreto para hacer la practica.
+// NOTAS sobre la evaluacion:
+//     - Para llegar al 5, hacer que escriba "hola". Hacer que el raton se mueva al reves, o cambiar letras o "encender luces" del tecladom, etc. seria el 10.
+//     - Practica a "mayores": hacer raid, o copiar la shell a /tmp cuando se ejecute el driver para hacerte superusuario cuando quieras....
+
+
+1 -    modstat
+2 -    modunload
+               ----> test doesn't work (mouse)
+               ----> modstat
+3 -    modload mouse                                    (/dev)                             ( hacer:   man mouse )
+               ----> test works again
+4 -    find mouse.c  (source code)                      (codigo en /src/dev/)              ( por ej. ps-mouse-base.c)
+       compile mouse.c      <---------------------------compilar sin modificarlo (NO es facil: hay que poner opciones "muy concretas" (y muchas, y dependen de la version). NOTAS:  poner    -DKERNEL   (NO estandar) , no funciona printf, ver el makefile )
+       newmouse.out
+       modstat | modunload mouse | modloal newmouse.out
+               ----> works
+5 -    change mouse.c
+              "printk "hola"
+(volver a paso   4 -> compile mouse.c  ...)
+     <END>
+
+Extra:
+- Invertir el ratón
+- Cambiar teclas teclado
+- RAID ?
+

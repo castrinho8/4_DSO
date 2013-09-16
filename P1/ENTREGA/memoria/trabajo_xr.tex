@@ -1,0 +1,332 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{color,graphicx}
+\usepackage[colorlinks=true,urlcolor=black]{hyperref}
+\usepackage[hyphenbreaks,preserveurlmacro]{breakurl}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{courier}
+ \lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+    	 frame=b,         
+         keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\emph\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+}
+
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+
+
+\renewcommand{\tablename}{Tabla}
+
+\title{\Huge{Práctica 1: Estructura del stack en dos sistemas.} \\ \normalsize{Diseño de Sistemas Operativos}}
+
+\author{Pablo Castro Valiño~(pablo.castro1@udc.es)}
+
+
+\date{Curso 2012-2013}
+	
+	
+\begin{document}
+	
+	
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Preguntas.}
+
+\begin{enumerate}
+  \item \textit{¿Qué es el stack?}
+  \\
+Es una estructura de pila organizada en frames que almacena variables, valores argumento
+y dirección de retorno del proceso al que pertenece.
+  
+  
+  \item \textit{¿Por qué estás seguro de que estás mostrando el stack?}
+  \\
+Porque visualizo el stack a partir del acceso a través de una variable local, la cual al
+pasarme de rango en los campos de la variable me permite observar el resto de objetos que
+hay en el mismo stack como variables o direcciones de retorno.
+
+
+  \item \textit{¿Qué es la dirección de retorno?}
+  \\
+Es la posición de memoria a la que una función, terminada su ejecución, debe saltar para 
+continuar el flujo del programa.
+
+
+  \item \textit{¿Por qué estás seguro de la identificación de la dirección de
+retorno?}
+  \\
+Porque tiene un número dentro del rango de direcciones del proceso, se mantiene
+constante con cada llamada recursiva de la función y al ser modificada podemos,
+mediante un proceso empírico, verificar que se puede retornar a la instrucción
+siguiente a la que debería, como se muestra en el fichero \textbf{salto\_espacial.c}
+(\ref{pre3}).
+
+
+  \item \textit{¿Qué es la dirección de la frame anterior?}
+  \\
+La dirección del frame anterior es la que contiene la dirección en donde se encuentran las
+variables, argumentos, etc. de la función desde la que se ha llamado a la función actual y
+a la que pertenece el frame actual.
+
+
+  \item \textit{¿Por qué estás seguro de la identificación de la dirección del frame
+anterior?}
+  \\
+Porque dicha dirección apunta a una posición dentro del stack que a su vez apunta a otra y
+asi sucesivamente y que todos se encuentran colocados en las mismas posiciones en el
+stack.
+Al igual que con la dirección de retorno, también podemos comprobar que podemos saltarnos
+un frame, esta vez mediante un salto temporal con el fichero \textbf{salto\_temporal.c}
+(\ref{pre4}).
+
+
+  \item \textit{¿Por qué estás seguro de la identificación de las variables argumento?}
+  \\
+Se ubican después del lugar donde se almacena la dirección de retorno y es sencillo
+distinguirlas cuando realizamos cambios en ellas, volvemos a ejecutar el programa y
+observamos dichos cambios reflejados en ellas.
+
+Si ejecutamos el fichero \textbf{test1-programa\_basico.c} (\ref{pre1}) se ve como
+aparecen reservadas varias posiciones, la primera corresponde a la única variable
+argumento y las 2 siguientes están guardadas por si introducimos mas variables argumento.
+
+Podemos utilizar el fichero \textbf{test2-programa\_argumentos.c} (\ref{pre2}) para
+identificar los argumentos, viendo como cambia la 1º variable argumento y como se
+mantienen las 2 siguientes que no son modificadas.
+
+
+  \item \textit{¿Por qué estás seguro de la identificación de las variables locales?}
+  \\
+Igual que en anteriores ocasiones, basamos nuestro juicio en la prueba empírica mediante
+el fichero \textbf{test1-programa\_basico.c} (\ref{pre1}) en el que al realizar cambios en
+las variables, podemos ver como estas cambian también en el stack.
+
+También hay que mencionar que la pila deja 2 espacios no utilizados entre las variables
+locales y la dirección del frame anterior.
+
+  \item \textit{¿Por qué estas seguro de la identificación del principio y fin de cada
+frame del stack?}
+  \\
+Viendo los valores que se guardan en el stack podemos observar como las variables locales
+están al principio, por lo tanto, si vemos de abajo hacia arriba, el frame siguiente al
+ultimo impreso por pantalla termina donde empiezan las variables locales del ultimo.
+
+
+  \item \textit{¿Por qué estás seguro del orden en el que se colocan los componentes
+de cada frame del stack?}
+  \\
+  Porque conocemos la estructura del stack y por lo tanto podemos reconocer los
+componentes que lo forman en los diversos frames.
+
+Incluso a traves de pruebas podemos ver como, modificando variables en el programa, se
+producen dichos cambios en los frames, por ejemplo la variable \emph{n}
+en \textbf{test1-programa\_basico.c} (\ref{pre1}) que se reduce en 1 para cada llamada
+recursiva.
+
+  
+  \item \textit{¿Qué es un salto espacial?}
+  \\
+Es un salto en el código. Mediante la modificación de la dirección de retorno, se salta a
+una linea de código distinta a la que debería llevarnos el flujo del programa.
+
+Un ejemplo de \emph{salto espacial} es el realizado en el
+fichero \textbf{salto\_espacial.c} (\ref{pre3}).
+  
+  
+  \item \textit{¿Qué es un salto temporal?}
+  \\
+Es un salto en el tiempo. Mediante la modificación de la posición del frame anterior,
+hacemos que apunte a otro, saltándonos de esta forma llamadas recursivas de la
+función.
+
+Un ejemplo de \emph{salto temporal} es el realizado en el fichero
+\textbf{salto\_temporal.c} (\ref{pre4}).
+
+
+  \item \textit{¿Cómo se realiza un salto por acceso al stack?}
+  \\
+Se realiza mediante la modificación de la dirección de retorno.
+  
+  
+  \item \textit{¿Cómo se obtienen los valores correspondientes para un salto
+cualquiera?}
+  \\
+Si lo que pretendemos es realizar un \emph{salto temporal}, necesitamos saber la posición
+del stack en la que se encuentra la dirección del frame anterior para poder modificarlo.
+También es imprescindible saber el tamaño del propio stack para sumarselo, después de
+haberlo multiplicado por 4 (tamaño de int), y así saltar un frame.
+
+En el caso de un \emph{salto espacial} necesitamos saber la posición en el stack de la
+dirección de retorno de la función para sumarle la distancia que querramos saltar. 
+En nuestro caso, queremos saltar una instrucción y por lo tanto usamos la
+función \textbf{distancia\_salto.c} (\ref{pre5}) para calcular la distancia que luego
+aplicamos en el salto.
+
+  \item \textit{¿Por qué estás seguro de que se ha saltado correctamente?}
+  \\
+Porque una vez realizado el salto, el programa continua ejecutándose en la posición que
+nosotros buscábamos.
+La prueba se ha realizado con el fichero \textbf{salto\_espacial.c} (\ref{pre3}) en el
+que se consiguió saltar una instrucción al regresar desde la ejecución de una función.
+  
+  \item \textit{Realiza el salto a otra posicion espacial.}
+  \\
+  Véase la función \textbf{salto\_espacial.c} (\ref{pre3})
+  
+  \item \textit{Realiza el salto a otra posición temporal.}
+  \\
+  Véase la función \textbf{salto\_temporal.c} (\ref{pre4})
+  
+\end{enumerate}
+
+
+
+\newpage
+
+
+\section{Procedimiento para la realización de la práctica.}
+
+\subsection{Análisis de la estructura y del contenido del stack.}
+Para la realización de la práctica se ha seguido como guión las preguntas proporcionadas
+en clase, por lo tanto primeramente se han creado los ficheros
+\textbf{test1-programa\_basico.c} (\ref{pre1}) y \textbf{test2-programa\_argumentos.c}
+(\ref{pre2}) con la intención de conocer la estructura y organización de la pila y que nos
+ha devuelto como resultados los contenidos en los ficheros \textbf{stack\_linux.txt}
+(\ref{pre6}) y \textbf{stack\_windows.txt} (\ref{pre7}), para Linux y Windows
+respectivamente.
+
+
+\subsection{Realización de un salto espacial.}
+A continuación siguiendo el guión entregado, hemos realizado el salto espacial que hemos
+recogido en el archivo \textbf{salto\_espacial.c} (\ref{pre3}),
+para el cual también hemos necesitado \textbf{distancia\_salto.c} (\ref{pre5}) con el que
+calculamos el número de instrucciones en ensamblador que debemos saltar para poder evitar
+la instrucción 	\emph{x++;}.
+
+
+\subsection{Realización de un salto temporal.}
+Finalmente se ha realizado el salto temporal tras haber calculado manualmente lo que
+ocupaba cada frame del buffer, y manteniendo un variable global que incrementamos en 1
+cada vez que se regresa de una recursión. El valor de la variable en una ejecución normal
+debería ser 4 pero al realizar el salto entre buffers el valor es 3.
+
+
+\newpage
+
+\section{Índice de archivos adjuntos.}
+
+\subsection{Parte obligatoria.}
+  \begin{enumerate}
+
+       
+    \item \textbf{Makefile} \label{pre0}
+Se ha introducido un fichero \emph{Makefile} para agilizar la compilación. 
+
+      \begin{itemize}
+
+	  \item \textbf{make all}
+	  Compila todos los ficheros.
+
+          \item \textbf{make tests}
+          Compila los ficheros de tests para comprobar la estructura del stack.
+
+          \item \textbf{make espacial}
+	  Compila el fichero que realiza el salto espacial.
+
+          \item \textbf{make temporal}
+	  Compila el fichero que realiza el salto temporal.
+
+          \item \textbf{make clean}
+	  Elimina todos los ficheros ejecutables.
+
+      \end{itemize}
+
+  \item \textbf{test1-programa\_basico.c} \label{pre1}
+  \\
+Programa básico para testear la colocación y la evolución de las variables locales
+que llama recursivamente a una funcion y muestra el stack.  
+
+
+  \item \textbf{test2-programa\_argumentos.c} \label{pre2}
+  \\
+Programa para testear la posición y la evolucion de los argumentos de una función y que 
+llama recursivamente a dicha funcion mostrando el stack.
+
+
+  \item \textbf{salto\_espacial.c} \label{pre3} 
+  \\
+Programa que llama recursivamente a una funcion, muestra el stack y finalmente salta
+una instruccion al modificar el valor de retorno de dicha función.
+
+Utilizando el archivo \emph{distancia\_salto.c} (\ref{pre5}) calculamos la distancia que
+debemos saltar y la sumamos a la dirección de retorno para que cuando la función regrese, 
+se salte la instrucción 'x++' e imprima por pantalla 'x = 0' en lugar de 'x = 1' 
+
+
+  \item \textbf{salto\_temporal.c} \label{pre4} 
+  \\
+Programa que llama recursivamente a una funcion, muestra el stack y realiza un salto
+temporal entre frames.
+
+Utilizamos una variable global llamada 'test' inicializada a 0 que suma 1 en cada vuelta
+de la recursión, al ser 'n = 3', habrá 3 llamadas recursivas mas la ejecución normal de
+la función por lo tanto si todo fuese correctamente, 'test' debería valer 4 pero como
+se realiza un salto temporal, valdrá finalmente 3.
+
+
+  \item \textbf{distancia\_salto.c} \label{pre5} 
+  \\
+Programa que calcula la distancia para la que se debe realizar el salto.
+
+Se etiqueta con 'a' la instrucción 'x++', con 'b' el 'printf...' y con la diferencia de
+sus direcciones de memoria se calcula la distancia a saltar.
+
+
+\item \textbf{stack\_linux.txt} \label{pre6} 
+  \\
+  Fichero que contiene el stack del programa \emph{test2-programa\_argumentos.c}
+(\ref{pre2}) ejecutado en \textbf{linux}.
+
+
+  \item \textbf{stack\_windows.txt} \label{pre7} 
+  \\
+  Fichero que contiene el stack del programa \emph{test2-programa\_argumentos.c}
+(\ref{pre2}) ejecutado en \textbf{windows}.
+  
+  \end{enumerate}
+
+
+
+\end{document}

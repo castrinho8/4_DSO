@@ -1,0 +1,241 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{color,graphicx}
+\usepackage[colorlinks=true,urlcolor=black]{hyperref}
+\usepackage[hyphenbreaks,preserveurlmacro]{breakurl}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{courier}
+ \lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+    	 frame=b,         
+         keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\emph\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+}
+
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+
+\renewcommand{\tablename}{Tabla}
+
+\title{\Huge{Práctica 2: Libería de manipulación de cadenas de caracteres.} \\
+\normalsize{Diseño de Sistemas Operativos}}
+
+\author{Pablo Castro Valiño~(pablo.castro1@udc.es)}
+
+
+\date{Curso 2012-2013}
+	
+	
+\begin{document}
+	
+	
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+\section{Procedimiento para la realización de la práctica.}
+
+\subsection{Creación de la librería.}
+
+\subsubsection{Introducción.}
+
+Para la implementación de esta librería de manipulación de strings mediante técnicas de
+mapping, la primera decisión que nos hemos visto obligados a tomar, ha sido motivada por
+la necesidad de devolver al usuario la misma posición de memoria que él nos ha
+proporcionado.
+
+Para solventar esta dificultad hemos creado una estructura de datos (\emph{cadena})
+compuesta por un puntero a una estructura de iov's y el tamaño de dicha estructura. De
+esta forma, cuando hagamos cambios en el string, crearemos uno nuevo y guardaremos su
+posición de memoria en nuestra estructura \emph{cadena} al igual que su nuevo tamaño,
+devolviendo al usuario el puntero a la \emph{cadena} correspodiente que nos había pasado.
+
+\subsubsection{STR\_INSERT\_V.}
+Función que realiza la insercción del string 'origen' en 'destino' en la posicion
+indicada y sin sobreescritura.
+
+\subsubsection{STR\_DELETE\_V.}
+Función que realiza el borrado de un rango de caracteres de un string.
+
+\subsubsection{STR\_DUP\_V.}
+Función que realiza una copia de una cadena en otra.
+
+\subsubsection{STR\_CAT\_V.}
+Función para la concatenación de dos strings dados.
+
+\subsubsection{STR\_CMP\_V.}
+Función de comparación de dos strings.
+
+\subsubsection{STR\_PRINTF\_V.}
+Función que imprime una cadena.
+
+\subsubsection{[OPT] INSERT\_OVER.}
+Función que realiza una copia de un string existente en otro en la posición indicada,
+básicamente es igual que \emph{STR\_INSERT\_V} pero con sobreescritura.
+
+
+\subsection{Diseño y ejecución de pruebas experimentales.}
+
+\subsubsection{Introducción y estructura de los tests.}
+
+La implementación de las pruebas se ha dividido en dos ficheros, uno para las pruebas de
+funcionamiento (\textbf{tests\_funcionamiento.c}(\ref{pre5})) y otro para las de tiempos
+(\textbf{tests\_tiempos.c}(\ref{pre3})).
+También se ha separado en otro fichero \textbf{tiempos\_lib.c}(\ref{pre4}), las funciones
+que realizan las mediciones de los tiempos.
+
+\subsubsection{Tests de funcionamiento.}
+
+Para implementación de estos tests, se han tenido en cuenta diversos casos generales y
+que probablemente se podrían ampliar en caso de disponer de más tiempo pero que deben ser
+suficientes para comprobar el correcto funcionamiento de la práctica.
+
+\paragraph{Comparación:}
+Las pruebas de comparación que se han realizado han sido con tamaños de nodo iguales
+variando si los strings eran iguales o diferentes y con tamaños de nodos distintos,
+también variando la igualdad de los strings.
+
+\paragraph{Insertado:}
+Se han realizado insercciones en la primera y última posición de una cadena y al
+principio, en el medio y al final de un nodo intermedio.
+
+\paragraph{Borrado:}
+Se han eliminado caracteres dentro de un nodo y también entre nodos, borrando el final de
+uno y el principio del siguiente.
+Del mismo modo se ha contemplado el borrado del primer y del último nodo completo, de dos
+nodos completos y por último el borrado del único nodo existente en el string.
+
+\paragraph{Concatenado:}
+Únicamente se ha procedido a realizar una simple concatenación entre dos cadenas de dos
+nodos cada una.
+
+\paragraph{Copia:}
+Para la copia únicamente se ha creado una nueva cadena con el valor de la anterior.
+
+\paragraph{[OPT] Insertado con sobreescritura:}
+Finalmente, para la función de insertado con sobreescritura se han considerado los casos
+que se indican a continuación.
+
+Se ha copiado un string de un nodo con el mismo tamaño que el segundo nodo del destino, de
+forma que se sobreescribiese un nodo completamente. Y por último se ha comprobado la copia
+entre nodos, al igual que en la primera posición y la última.
+
+\subsubsection{Tests de duración.}
+
+Como se ha observado mediante una comprobación empírica, los tiempos de inserción no
+son los mismos para cada inserción independiente ya que la posible aparición de
+interrupciones en el sistema no está bajo nuestro control, por lo tanto se ha decidido
+aplicar las funciones un número determinado de iteraciones y calcular el tiempo medio
+de realización de las mismas.\\
+
+No se ha realizado comprobación alguna, en referencia al posible valor de error que puedan
+devolver las funciones implementadas en estos tests ya que su comprobación implicaría
+aumentar el tiempo de ejecución de las pruebas. Este es el motivo por el que si
+introducimos índices incorrectos, la aplicación después de mostrar el error, producirá un
+\emph{segmentation fault}.\\
+
+\subsection{Conclusiones.}
+
+Como conclusiones cabe destacar la correcta implementación de la mayor parte de
+funciones. Todas a excepción de la comparación y la parte optativa obtienen mejores
+resultados que las funciones típicas de manejo de strings.\\
+
+Se han realizado tests con strings de tamaños comprendidos entre 2K y 1M en los cuales
+podemos ver, como a medida que los strings crecen, nuestras funciones mantienen el tiempo
+constante mientras que las de tratamiento habitual de strings, aumentan fuertemente.
+
+
+\newpage
+
+\section{Índice de archivos adjuntos.}
+
+  \begin{enumerate}
+
+       
+    \item \textbf{Makefile} \label{pre0}
+Se ha introducido un fichero \emph{Makefile} para agilizar la compilación. 
+
+      \begin{itemize}
+
+	  \item \textbf{make all}
+	  Compila todos los ficheros.
+
+          \item \textbf{make tests}
+	  Compila los tests a realizar.
+
+          \item \textbf{make clean}
+	  Elimina todos los ficheros ejecutables.
+	  
+	  \item \textbf{make tar}
+	  Crea un tar.gz con todos los ficheros fuente.
+	
+      \end{itemize}
+
+  \item \textbf{strings\_lib.c} \label{pre1}
+  \\
+  Parte obligatoria de la librería de manipulación de strings a traves de las estructuras
+'cadena'.
+
+  \item \textbf{cadena\_lib.c} \label{pre2}
+  \\
+  Fichero cuyo contenido se corresponde a la implementación de las estructuras 'cadena'
+utilizadas en la libería de strings, asi como las funciones necesarias para el uso de
+estas estructuras.
+Estas funciones serán las que se le proporcionarán al usuario para que pueda hacer uso de
+nuestra \emph{string\_lib}.
+
+  \item \textbf{tests\_tiempos.c} \label{pre3} 
+  \\
+  Fichero en el que se encuentran implementados los tests que se han realizado para
+comprobar la eficiencia temporal en la ejecución de nuestra liberería.
+  
+  \item \textbf{tiempos\_lib.c} \label{pre4} 
+  \\
+  Fichero que contiene las funciones de medición de tiempos para cada una de las
+funciones anteriormente implementadas en \textbf{strings\_lib.c} (\ref{pre1}).
+  
+  \item \textbf{tests\_funcionamiento.c} \label{pre5} 
+  \\
+  Fichero similiar a \textbf{tests\_tiempos.c}(\ref{pre3}) en el que se encuentran los
+tests creados para comprobar el correcto funcionamiento de las funciones
+de \textbf{strings\_lib.c} (\ref{pre1}).
+
+  \item \textbf{old\_strings\_lib.c} \label{pre6} 
+  \\
+Fichero que contiene las implementaciones de insertado, borrado y insertado con
+sobreescritura para los strings habituales.
+  
+  \end{enumerate}
+
+
+\end{document}

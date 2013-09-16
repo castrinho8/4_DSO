@@ -1,0 +1,72 @@
+
+
+/*-----------PARTE OPTATIVA---------*/
+/*
+* 6- INSERT_IN: Inserta el string "src" en "dest" en la posicion indicada CON SOBREESCRITURA
+*	- Insertar un nuevo substring en una posición dada para un string existente
+void insert_in(struct iovec * src,int nodos_src,struct iovec * dest,int nodos_dest,int pos){
+
+	int pos_nodo = 0,pos_rel = 0;
+
+	//Busca first y comprueba errores.
+	if(seek_pos(pos,dest,nodos_dest,&pos_nodo,&pos_rel) == -1) 
+		return;
+
+
+	if (pos_rel == 0){ //PRINCIPIO DE NODO
+
+ 		new_node = (struct iovec *) malloc((nodos_dest + nodos_src)*sizeof(struct iovec));
+
+		//copiar estructuras anteriores
+		memcpy(new_node,dest,((pos_nodo)*sizeof(struct iovec)));	
+
+		//Copia estructura hasta "pos_rel"
+		memcpy(new_node+pos_nodo,dest+pos_nodo,sizeof(struct iovec));//copia nodo dest
+		new_node[pos_nodo].iov_len = pos_rel; //cambiamos el tamaño
+
+		int quedan = tam_src;
+		int van = 0;
+		int nodo_actual = pos_nodo;
+		int rel_actual = pos_rel;
+
+		while(van < tam_src){
+			avance = dest[nodo_actual].iov_len - rel_actual;
+			rel_actual = 0;
+				if(pos_rel > new_node[pos_nodo].iov_len)
+					
+			quedan--;
+			van = van+avance;
+		}
+
+		//copia "src"
+		memcpy(new_node+pos_nodo,src,nodos_src*sizeof(struct iovec)); 
+
+		//copiar estructuras posteriores
+		memcpy(new_node+(pos_nodo+nodos_src),dest+pos_nodo,(nodos_dest-pos_nodo)*sizeof(struct iovec));
+
+	}else{ //EN MEDIO DE NODO
+
+		new_node = (struct iovec *) malloc((nodos_dest + nodos_src + 1)*sizeof(struct iovec));
+
+		//copiar estructuras anteriores
+		memcpy(new_node,dest,((pos_nodo)*sizeof(struct iovec)));
+
+		//Copia estructura hasta "pos_rel"
+		memcpy(new_node+pos_nodo,dest+pos_nodo,sizeof(struct iovec));//copia nodo dest
+		new_node[pos_nodo].iov_len = pos_rel; //cambiamos el tamaño
+
+ 		//copia "src"
+		memcpy(new_node+pos_nodo+1,src,nodos_src*sizeof(struct iovec));
+
+		//Copia estructura desde "pos_rel"
+		memcpy(new_node+(pos_nodo+1+nodos_src),dest+pos_nodo,sizeof(struct iovec)); //copia nodo dest
+		new_node[pos_nodo+1+nodos_src].iov_base = new_node[pos_nodo+1+nodos_src].iov_base + pos_rel; //cambiamos el puntero
+		new_node[pos_nodo+1+nodos_src].iov_len = new_node[pos_nodo+1+nodos_src].iov_len - pos_rel; //cambiamos el tamaño
+
+		//copiar estructuras posteriores
+		memcpy(new_node+(pos_nodo+nodos_src+2),dest+pos_nodo+1,(nodos_dest-pos_nodo+1)*sizeof(struct iovec));
+	}
+	return new_node;
+}
+*/
+

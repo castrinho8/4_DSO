@@ -1,0 +1,102 @@
+SALIDA DEL STACK LINUX
+
+0 - 	0xbfc8dc78 5					/*LOCAL: Array "a"*/
+1 - 	0xbfc8dc7c 5					/*LOCAL: Array "a"*/
+2 - 	0xbfc8dc80 5					/*LOCAL: Array "a"*/
+3 - 	0xbfc8dc84 5					/*LOCAL: Array "a"*/
+4 - 	0xbfc8dc88 5					/*LOCAL: Array "a"*/
+5 - 	0xbfc8dc8c 5					/*LOCAL: Array "a"*/
+6 - 	0xbfc8dc90 5					/*LOCAL: Array "a"*/
+7 - 	0xbfc8dc94 5					/*LOCAL: Array "a"*/
+8 - 	0xbfc8dc98 5					/*LOCAL: Array "a"*/
+9 - 	0xbfc8dc9c 5					/*LOCAL: Array "a"*/
+10 - 	0xbfc8dca0 10					/*LOCAL: Tamaño array "a"*/
+11 - 	0xbfc8dca4 18					/*LOCAL: "b"*/
+12 - 	0xbfc8dca8 19					/*LOCAL: "bb"*/
+13 - 	0xbfc8dcac 20					/*LOCAL: "bbb"*/
+14 - 	0xbfc8dcb0 0
+15 - 	0xbfc8dcb4 0
+16 - 	0xbfc8dcb8 -1077355240		/*Dirección del Frame anterior*/
+17 - 	0xbfc8dcbc 134513945			/*Dirección de retorno*/
+18 - 	0xbfc8dcc0 0					/*ARGUMENTO: n .Iteracion 3*/
+19 - 	0xbfc8dcc4 3					/*ARGUMENTO: arg1*/
+20 - 	0xbfc8dcc8 3					/*ARGUMENTO: arg2*/
+21 - 	0xbfc8dccc -1217363980
+22 - 	0xbfc8dcd0 -1217357640
+23 - 	0xbfc8dcd4 -1217363980
+24 - 	0xbfc8dcd8 5					/*Comienzo del Frame anterior/					
+25 - 	0xbfc8dcdc 5
+26 - 	0xbfc8dce0 5
+27 - 	0xbfc8dce4 5
+28 - 	0xbfc8dce8 5
+29 - 	0xbfc8dcec 5
+30 - 	0xbfc8dcf0 5
+31 - 	0xbfc8dcf4 5
+32 - 	0xbfc8dcf8 5
+33 - 	0xbfc8dcfc 5
+34 - 	0xbfc8dd00 10
+35 - 	0xbfc8dd04 18
+36 - 	0xbfc8dd08 19
+37 - 	0xbfc8dd0c 20
+38 - 	0xbfc8dd10 0
+39 - 	0xbfc8dd14 0
+40 - 	0xbfc8dd18 -1077355144		/*Dirección del Frame anterior*/
+41 - 	0xbfc8dd1c 134513945			/*Dirección de retorno*/
+42 - 	0xbfc8dd20 1					/*ARGUMENTO: n .Iteracion 2*/
+43 - 	0xbfc8dd24 3					/*ARGUMENTO: arg1*/
+44 - 	0xbfc8dd28 3					/*ARGUMENTO: arg2*/
+45 - 	0xbfc8dd2c -1217363980
+46 - 	0xbfc8dd30 -1217357640
+47 - 	0xbfc8dd34 -1217363980
+48 - 	0xbfc8dd38 5
+49 - 	0xbfc8dd3c 5
+50 - 	0xbfc8dd40 5
+51 - 	0xbfc8dd44 5
+52 - 	0xbfc8dd48 5
+53 - 	0xbfc8dd4c 5
+54 - 	0xbfc8dd50 5
+55 - 	0xbfc8dd54 5
+56 - 	0xbfc8dd58 5
+57 - 	0xbfc8dd5c 5
+58 - 	0xbfc8dd60 10
+59 - 	0xbfc8dd64 18
+60 - 	0xbfc8dd68 19
+61 - 	0xbfc8dd6c 20
+62 - 	0xbfc8dd70 0
+63 - 	0xbfc8dd74 0
+64 - 	0xbfc8dd78 -1077355048		/*Dirección del Frame anterior*/
+65 - 	0xbfc8dd7c 134513945			/*Dirección de retorno*/
+66 - 	0xbfc8dd80 2					/*ARGUMENTO: n .Iteracion 1*/
+67 - 	0xbfc8dd84 3					/*ARGUMENTO: arg1*/
+68 - 	0xbfc8dd88 3					/*ARGUMENTO: arg2*/
+69 - 	0xbfc8dd8c -1217363980
+70 - 	0xbfc8dd90 -1217357640
+71 - 	0xbfc8dd94 -1217363980
+72 - 	0xbfc8dd98 5
+73 - 	0xbfc8dd9c 5
+74 - 	0xbfc8dda0 5
+75 - 	0xbfc8dda4 5
+76 - 	0xbfc8dda8 5
+77 - 	0xbfc8ddac 5
+78 - 	0xbfc8ddb0 5
+79 - 	0xbfc8ddb4 5
+80 - 	0xbfc8ddb8 5
+81 - 	0xbfc8ddbc 5
+82 - 	0xbfc8ddc0 10
+83 - 	0xbfc8ddc4 18
+84 - 	0xbfc8ddc8 19
+85 - 	0xbfc8ddcc 20
+86 - 	0xbfc8ddd0 0
+87 - 	0xbfc8ddd4 0
+88 - 	0xbfc8ddd8 -1077355016
+89 - 	0xbfc8dddc 134514009			/*Dirección de retorno*/
+90 - 	0xbfc8dde0 3					/*ARGUMENTO: n .Iteracion 0*/
+91 - 	0xbfc8dde4 3					/*ARGUMENTO: arg1*/
+92 - 	0xbfc8dde8 3					/*ARGUMENTO: arg2*/
+93 - 	0xbfc8ddec -1217363980
+94 - 	0xbfc8ddf0 134514032
+95 - 	0xbfc8ddf4 0
+96 - 	0xbfc8ddf8 0
+97 - 	0xbfc8ddfc -1218988845
+98 - 	0xbfc8de00 1
+99 - 	0xbfc8de04 -1077354860

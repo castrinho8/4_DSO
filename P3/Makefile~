@@ -1,0 +1,19 @@
+# Practica 3 -DSO
+# Pablo Castro Valiño ( pablo.castro1@udc.es ).
+
+#Compilador.
+COMP = gcc
+
+
+all: factorial
+	
+factorial:
+	$(COMP) -o ej1 factorial.c -lm -g
+
+clean:
+	rm -f *.o ej1
+
+tar: clean
+	tar czvf p2.tar.gz Makefile factorial.c
+
+
