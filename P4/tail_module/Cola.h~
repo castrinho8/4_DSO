@@ -2,8 +2,6 @@
 # Pablo Castro Valiño (pablo.castro1@udc.es)
 # Deseño de Sistemas Operativos
 
-Cabeceras de Cola.c
-
 */
 #include <stdio.h>
 #include <stdlib.h>

@@ -2,10 +2,6 @@
 # Pablo Castro Valiño (pablo.castro1@udc.es)
 # Deseño de Sistemas Operativos
 
-Device driver que funciona como una cola de caracteres de un tamaño
-máximo al que es inicializada y en el cual entran y salen elementos
-en orden.
-
 
 Links interesantes:
 http://www.linuxjournal.com/article/2920 registrar drivers

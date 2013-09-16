@@ -1,1 +1,0 @@
-KERNEL=="random_minus", SYMLINK+="random_minus_module", MODE="0444"

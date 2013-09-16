@@ -1,11 +1,4 @@
-/*
-# Pablo Castro Valiño (pablo.castro1@udc.es)
-# Deseño de Sistemas Operativos
-
-Implementación de una cola de caracteres
-
-*/
-
+//Cola.c
 #include <linux/fs.h>
 #include <linux/init.h>
 #include <linux/miscdevice.h>

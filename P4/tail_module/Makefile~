@@ -6,7 +6,6 @@
 COMP=gcc
 MODCFLAGS := -O -Wall -DMODULE -D__KERNEL__
 
-
 tail: tail_module.o cola.o
 	ld -m elf_i386 -r -o modulo.o tail_module.o cola.o
 
